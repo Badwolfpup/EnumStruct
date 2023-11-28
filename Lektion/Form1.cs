@@ -22,9 +22,8 @@ namespace Lektion
     public partial class Form1 : Form
     {
         TableLayoutPanel tpanel = new TableLayoutPanel();
-        Panel panel = new Panel();
+        Panel panel;
         Panel[,] panelArray = new Panel[10, 10];
-        Direction direction;
         Position oldPosition = new Position(0,0);
         Position newPosition;
         Position enemyOldPosition;
@@ -57,7 +56,6 @@ namespace Lektion
             }
             Controls.Add(tpanel);
             tpanel.Dock = DockStyle.Fill;
-            int x;
             Random r = new Random();
             enemyOldPosition = new Position(r.Next(7, panelArray.GetLength(0) - 1), r.Next(7, panelArray.GetLength(1) - 1));
             panelArray[enemyOldPosition.X, enemyOldPosition.Y].BackColor = Color.Red;
