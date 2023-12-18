@@ -106,11 +106,6 @@ namespace Lektion
                 MessageBox.Show("Du förlorade", "THE END", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Application.Exit();
             }
-            if (panelArray[newPosition.X, newPosition.Y].BackColor == Color.Purple)
-            {
-                while (!purple()) { }
-            }
-            if (panelArray[newPosition.X, newPosition.Y].BackColor == Color.Yellow) yellow();
             
             panelArray[oldPosition.X, oldPosition.Y].BackColor = Color.Gray;
             panelArray[newPosition.X, newPosition.Y].BackColor = Color.Green;
@@ -158,79 +153,13 @@ namespace Lektion
                 MessageBox.Show("Du förlorade", "THE END", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Application.Exit();
             }
-            if (panelArray[enemyNewPosition.X, enemyNewPosition.Y].BackColor == Color.Purple)
-            {
-                while (!purple()) { }
-            }
-            if (panelArray[enemyNewPosition.X, enemyNewPosition.Y].BackColor == Color.Yellow) yellow();
+
             panelArray[enemyOldPosition.X, enemyOldPosition.Y].BackColor = Color.Gray;
             panelArray[enemyNewPosition.X, enemyNewPosition.Y].BackColor = Color.Red;
             enemyOldPosition = enemyNewPosition;
-            addItems();
+
             return true;
         }
 
-        private void addItems()
-        {
-            Random r = new Random();
-            while (true)
-            {
-                if (r.Next(100) < 25)
-                {
-                    int x = r.Next(panelArray.GetLength(0));
-                    int y = r.Next(panelArray.GetLength(1));
-                    if (panelArray[x, y].BackColor != Color.Green || panelArray[x, y].BackColor != Color.Red)
-                    {
-                        if (r.Next(2) == 0) panelArray[x, y].BackColor = Color.Purple;
-                        else panelArray[x, y].BackColor = Color.Yellow;
-                        return;
-                    }
-                }
-                else return;
-            }
-        }
-
-        private bool purple()
-        {
-            Random r = new Random();
-            int x = r.Next(1, 4);
-            int y = r.Next(1, 4);
-            if (panelArray[x,y].BackColor != Color.Purple && panelArray[x, y].BackColor != Color.Yellow && (oldPosition.X != x && oldPosition.Y != y))
-            {
-                panelArray[enemyOldPosition.X, enemyOldPosition.Y].BackColor = Color.Gray;
-                panelArray[x,y].BackColor = Color.Red;
-                enemyOldPosition.X = x;
-                enemyOldPosition.Y = y;
-                return true;
-            } else return false;
-        }
-
-        private void yellow()
-        {
-            Random r = new Random();
-            switch (r.Next(4))
-            {
-                case 0:
-                    panelArray[enemyOldPosition.X, enemyNewPosition.Y].BackColor = Color.Gray;
-                    enemyOldPosition.X = 0;
-                    enemyOldPosition.Y = 0;
-                    break;
-                case 1:
-                    panelArray[enemyOldPosition.X, enemyNewPosition.Y].BackColor = Color.Gray;
-                    enemyOldPosition.X = panelArray.GetLength(0) - 1;
-                    enemyOldPosition.Y = 0;
-                    break; 
-                case 2:
-                    panelArray[enemyOldPosition.X, enemyNewPosition.Y].BackColor = Color.Gray;
-                    enemyOldPosition.X = 0;
-                    enemyOldPosition.Y = panelArray.GetLength(1) - 1;
-                    break;
-                case 3:
-                    panelArray[enemyOldPosition.X, enemyNewPosition.Y].BackColor = Color.Gray;
-                    enemyOldPosition.X = 0;
-                    enemyOldPosition.Y = panelArray.GetLength(1) - 1;
-                    break;
-            }
-        }
     }
 }
